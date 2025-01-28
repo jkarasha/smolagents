@@ -8,4 +8,5 @@ dependencies = [
     "googlemaps>=4.10.0",
     "python-dotenv>=1.0.1",
     "smolagents[litellm,transformers]>=1.5.0",
+    "sqlalchemy>=2.0.37",
 ]

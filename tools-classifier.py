@@ -24,8 +24,12 @@ def model_download_tool(task: str) -> str:
     most_downloaded_model = next(iter(list_models(filter=task, sort="downloads", direction=-1)))
     return most_downloaded_model.id
 
+# use decorated function
+#agent = CodeAgent(tools=[model_download_tool], model=HfApiModel())
 
-agent = CodeAgent(tools=[model_download_tool], model=HfApiModel())
+# use class
+agent = CodeAgent(tools=[ModelDownloadTool()], model=HfApiModel())
+
 
 agent.run(
     "Can you give me the name of the model that has the most downloads in the 'text-to-video' task on the Hugging Face Hub?"

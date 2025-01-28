@@ -37,6 +37,7 @@ for row in rows:
     stmt = insert(receipts).values(**row)
     with engine.begin() as connection:
         cursor = connection.execute(stmt)
+        
 # Create a waiters table
 table_name = "waiters"
 receipts = Table(
@@ -73,7 +74,7 @@ for table in ["receipts", "waiters"]:
 
 print(updated_description)
 
-from smolagents import tool
+from smolagents import tool, Tool
 
 @tool
 def sql_engine(query: str) -> str:
@@ -98,17 +99,43 @@ def sql_engine(query: str) -> str:
 
 from smolagents import CodeAgent, HfApiModel, AzureOpenAIServerModel
 
+class SqlEngineTool(Tool):
+    name = "sql_engine"
+    description = """Allows you to perform SQL queries on the table. Returns a string representation of the result.
+    The table is named 'receipts'. Its description is as follows:
+        Columns:
+        - receipt_id: INTEGER
+        - customer_name: VARCHAR(16)
+        - price: FLOAT
+        - tip: FLOAT"""
+    inputs = {"query": {"type": "string", "description": "The query to perform. This should be correct SQL."}}
+    output_type = "string"
+
+    def forward(self, query: str) -> str:
+        output = ""
+        with engine.connect() as con:
+            rows = con.execute(text(query))
+            for row in rows:
+                output += "\n" + str(row)
+        return output
+
+
+# use Azure OpenAI with gpt-4o-mini
 model = AzureOpenAIServerModel(
     model_id = "gpt-4o-mini",
     azure_endpoint=os.getenv("AZURE_OPENAI_ENDPOINT"),
     api_key=os.getenv("AZURE_OPENAI_API_KEY"),
     api_version=os.getenv("OPENAI_API_VERSION")    
 )
+# Try using a different model
+model=HfApiModel("Qwen/Qwen2.5-Coder-32B-Instruct")
 
 agent = CodeAgent(
-    tools=[sql_engine],
+    tools=[SqlEngineTool()],
     model=model
     )
 #
 #agent.run("Can you give me the name of the client who got the most expensive receipt?")
-agent.run("Which waiter(show waiter's name) got more total money from tips?")
+#
+# Instead of showing the waiter's name, it's showing the customer name instead. Update comment to show waiter's name.
+agent.run("Which waiter got most total money from tips? Show me the name and amount.")

@@ -102,12 +102,7 @@ from smolagents import CodeAgent, HfApiModel, AzureOpenAIServerModel
 class SqlEngineTool(Tool):
     name = "sql_engine"
     description = """Allows you to perform SQL queries on the table. Returns a string representation of the result.
-    The table is named 'receipts'. Its description is as follows:
-        Columns:
-        - receipt_id: INTEGER
-        - customer_name: VARCHAR(16)
-        - price: FLOAT
-        - tip: FLOAT"""
+    """
     inputs = {"query": {"type": "string", "description": "The query to perform. This should be correct SQL."}}
     output_type = "string"
 
@@ -128,7 +123,7 @@ model = AzureOpenAIServerModel(
     api_version=os.getenv("OPENAI_API_VERSION")    
 )
 # Try using a different model
-model=HfApiModel("Qwen/Qwen2.5-Coder-32B-Instruct")
+#model=HfApiModel("Qwen/Qwen2.5-Coder-32B-Instruct")
 
 agent = CodeAgent(
     tools=[SqlEngineTool()],

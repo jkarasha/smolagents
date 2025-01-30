@@ -138,4 +138,4 @@ agent = CodeAgent(
 #agent.run("Can you give me the name of the client who got the most expensive receipt?")
 #
 # Instead of showing the waiter's name, it's showing the customer name instead. Update comment to show waiter's name.
-agent.run("Which waiter got most total money from tips? Show me the name and amount.")
+agent.run("Which waiter got most total money from tips? Show me the waiter's name and amount.")

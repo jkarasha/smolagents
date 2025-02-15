@@ -41,7 +41,6 @@ def _(InferenceClient):
     client = InferenceClient("meta-llama/Llama-3.2-3B-Instruct")
     # if the outputs for next cells are wrong, the free model may be overloaded. You can also use this public endpoint that contains Llama-3.2-3B-Instruct
     #client = InferenceClient("https://jc26mwg228mkj8dw.us-east-1.aws.endpoints.huggingface.cloud")
-
     return (client,)
 
 
@@ -120,7 +119,6 @@ def _():
     Final Answer: the final answer to the original input question
 
     Now begin! Reminder to ALWAYS use the exact characters `Final Answer:` when you provide a definitive answer. """
-
     return (SYSTEM_PROMPT,)
 
 
@@ -163,7 +161,6 @@ def _():
         return f"the weather in {location} is sunny with low temperatures. \n"
 
     get_weather('London')
-
     return (get_weather,)
 
 

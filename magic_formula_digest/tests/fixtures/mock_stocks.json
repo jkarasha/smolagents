@@ -1,0 +1,18 @@
+{
+    "AAPL": {
+        "Symbol": "AAPL",
+        "EBIT": 100000000000,
+        "EnterpriseValue": 500000000000,
+        "NetFixedAssets": 200000000000,
+        "WorkingCapital": 50000000000,
+        "Rank": 1
+    },
+    "MSFT": {
+        "Symbol": "MSFT",
+        "EBIT": 80000000000,
+        "EnterpriseValue": 400000000000,
+        "NetFixedAssets": 150000000000,
+        "WorkingCapital": 40000000000,
+        "Rank": 2
+    }
+}

@@ -1,0 +1,18 @@
+{
+    "AAPL": [
+        {
+            "source": {"name": "Reuters"},
+            "title": "Apple Reports Record Earnings",
+            "description": "Apple Inc reported record quarterly earnings...",
+            "url": "https://example.com/apple-earnings"
+        }
+    ],
+    "MSFT": [
+        {
+            "source": {"name": "Bloomberg"},
+            "title": "Microsoft Cloud Revenue Soars",
+            "description": "Microsoft's cloud division shows strong growth...",
+            "url": "https://example.com/microsoft-cloud"
+        }
+    ]
+}
